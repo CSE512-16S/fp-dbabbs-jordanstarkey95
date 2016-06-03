@@ -22,19 +22,20 @@
       <div class="container-fluid">
          <div class="page-header">
             <h1>UW Course Sequence Explorer</h1>
-            <p class="lead">Explore the University of Washington's course catalog through dynamic trees.</p>
+            <p class="lead">Explore the University of Washington's course catalog through dynamic trees. </br> <small>Created by Dylan Babbs & Jordan Starkey.<small></p>
          </div>
          <div class="form-inline">
+            <p class="lead">Input a department code and course number to explore course sequences</p>
             <div class="form" id="program">
       			<!--<label for="courseInput">Select Program</label>-->
       			<input class="form-control" type="text" id="programInput" list="programs" placeholder="CSE">
       			<datalist id="programs"></datalist>
       			<button class="btn btn-primary" id="programSearch">Search Courses</button><br>
 
-      			<span class="loading" id="loadingprograms">
+      			<!--<span class="loading" id="loadingprograms">
       				<img src="https://webster.cs.washington.edu/images/babynames/loading.gif" alt="icon" />
       				Loading...
-      			</span>
+      			</span>-->
       		</div>
 
       		<div class="form" id="course">
@@ -42,10 +43,10 @@
          		<input class="form-control" type="text" id="courseInput" list="courses" placeholder="512">
          		<datalist id="courses"></datalist>
          		<button class="btn btn-primary" id="courseSearch">Search Sequence</button>
-         		<span class="loading" id="loadingcourses">
+         		<!--<span class="loading" id="loadingcourses">
          			<img src="https://webster.cs.washington.edu/images/babynames/loading.gif" alt="icon" />
          			Loading...
-         		</span>
+         		</span>-->
       		</div>
          </div>
 
