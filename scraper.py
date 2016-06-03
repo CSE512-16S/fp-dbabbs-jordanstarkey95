@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import re, requests, json, pickle, glob
 
-'''
 # Beautiful soup object initialize and request
 r = requests.get('https://www.washington.edu/students/crscat/')
 courseList = BeautifulSoup(r.content, "html.parser")
@@ -10,7 +9,7 @@ links = courseList.findAll("a", {"href" : re.compile("^.*.html$")})
 # Create a dict of "url":"Program"
 c = {}
 for course in links:
-    title_search = re.search("[(].*[)]$", course.text)
+    title_search = re.search("[(].*[)]", course.text)
     if title_search:
         t = title_search.group()
         tindex = t.rfind("(")
@@ -20,6 +19,39 @@ for course in links:
         if t.find("See") is -1:
             c[course['href']] = t
 
+'''
+# creates json file for program : courses list, used to populate search fields and create programList.json
+f = {}
+
+for k, y in c.items():
+    # list program courses
+    p = []
+
+    r = requests.get(url + k)
+    courseList = BeautifulSoup(r.content, "html.parser")
+    courses = courseList.select("p")
+    # filter courses (skips any <p> that isnt course listing (e.g. course offerings)
+    # also eliminates unencoded chars (amp;)
+    courses = [x for x in courses if re.match('^' + y + '.*', x.text) and re.sub(r'amp;', '', x.text)]
+    for course in courses:
+        courseText = re.sub(';', '', course.text)
+        title = str(re.search('^' + y + '\s\d{3}', courseText).group())
+        title = re.sub("\D", "", title)
+        p.append(title)
+    f[y.encode('utf-8')] = p
+
+# csv output
+with open("programList.csv", "wb") as outfile:
+   writer = csv.writer(outfile)
+   writer.writerow(f.keys())
+   writer.writerows(itertools.izip_longest(*f.values()))
+
+# json
+with open('programList.json', 'w') as outfile:
+    json.dump(f, outfile)
+
+print(json.dumps(f))
+'''
 
 # For each url,program item in dict
 for k, y in c.items():
@@ -92,6 +124,9 @@ for k, y in c.items():
         # if prerequsites exist, filter them into choice or required and add class attributes
         if preqIndex != -1:
 
+            minGradeIndex = courseText.find("minimum grade of")
+            if minGradeIndex != -1:
+
             c["description"] = courseText[:preqIndex]
 
             # strip char punctuations
@@ -109,6 +144,7 @@ for k, y in c.items():
                 choice_preqreqs = re.findall('[A-Z]+\s?[A-Z]\s+\d{3}', courseText[eitherIndex:])
                 for choice_preqreq in choice_preqreqs:
                     choice_preqList.append({"name": choice_preqreq})
+
             else:
                 required_prereqs = re.findall('[A-Z]+\s?[A-Z]\s+\d{3}', coursePreq)
 
@@ -117,6 +153,10 @@ for k, y in c.items():
 
         c["choice_prereqs"] = choice_preqList
         c["required_prereqs"] = required_preqList
+
+        print c["name"]
+        print c["required_prereqs"]
+        print c["choice_prereqs"]
 
         p.append(c)
 
@@ -134,12 +174,12 @@ for k, y in c.items():
                 h["type"] = "choice"
                 is_preqFor.append(h)
         # append children to course if they exist
-        #if len(is_preqFor) > 0:
         m["children"] = is_preqFor
 
     # beginning of recursive call
     for d in f:
         recurse(d, [])
+
     # write each program to json file
     try:
         outfile = open('output' + y + '.json', 'w')
@@ -147,7 +187,7 @@ for k, y in c.items():
         outfile.close()
     except ValueError:
         print f
-'''
+
 
 # different output formats
 '''
@@ -185,8 +225,9 @@ for f in read_files:
         try:
             output_list.append({title: json.load(infile)})
         except ValueError:
-            print infile
+            print infile.text
             pass
+
 
 # merge all program files
 with open("merged_file.json", "wb") as outfile:
