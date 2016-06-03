@@ -11,7 +11,7 @@
 	};
 
 	function getCourseSequence() {
-		var program = document.getElementById("programInput").value;
+		var program = document.getElementById("programInput").value.toUpperCase();
 		var course = document.getElementById("courseInput").value;
 		var pc = program + " " + course;
 		// check if program/course is valid
@@ -136,18 +136,15 @@
 
 			//Collapse 2+ degree nodes
 			function collapse(d) {
-				if (d.children) {
-					d._children = d.children;
-					d._children.forEach(collapse);
-					d.children = null;
-				}
-			}
+			    if (Object.keys(d.children).length > 0) {
+			      d._children = d.children;
+			      d._children.forEach(collapse);
+			      d.children = null;
+			    }
+			  }
 
 			//Collapse nodes
-			if (typeof root != 'undefined' && Object.keys(root).length > 1) {
-				root.children.forEach(collapse);
-			}
-			//draw tree
+			root.children.forEach(collapse);
 			update(root);
 		});
 	}
@@ -168,7 +165,9 @@
 	function getObjects(data, pc) {
 		var objs = JSON.search(data, '//*[name="' + pc + '"]');
 		for (var i = 0; i < objs.length; i++) {
-			return objs[i]
+			if(objs[i].children !== undefined) {
+				return objs[i];
+			}
 		}
 	}
 
@@ -204,6 +203,8 @@
 			.attr("r", 10)
 			//Fills with blue if contains children
 			.style("fill", function(d) {
+				console.log(d);
+				console.log(d._children);
 				return d._children ? "lightsteelblue" : "#fff";
 			});
 
@@ -304,14 +305,14 @@
 
 	// Toggle children on click.
 	function click(d) {
-		if (d.children) {
-			d._children = d.children;
-			d.children = null;
-		} else {
-			d.children = d._children;
-			d._children = null;
-		}
-		update(d);
-	}
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  } else {
+    d.children = d._children;
+    d._children = null;
+  }
+  update(d);
+}
 
 })(window.d3);
