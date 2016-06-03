@@ -2,13 +2,13 @@
 	"use strict";
 
 	//Path for local file requests
-	var path = "https://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/";
+	var path = "http://localhost:8000/Desktop/512_Final/Demo/";
 
 	window.onload = function() {
 		document.getElementById("programSearch").onclick = getCourseList;
 		document.getElementById("courseSearch").onclick = getCourseSequence;
 		document.getElementById("loadingprograms").style.display = "block";
-		getQuery(path + "programs.json", fillProgramList);
+		getQuery(path + "programList.json", fillProgramList);
 	};
 
 	function getCourseSequence() {
@@ -38,7 +38,7 @@
 	//
 	function getCourseList() {
 		document.getElementById("loadingcourses").style.display = "block";
-		getQuery(path + "programs.json", fillCourseList);
+		getQuery(path + "programList.json", fillCourseList);
 	}
 
 	//
