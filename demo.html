@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <html>
+
 <head>
     <meta charset="utf-8">
-	<title>512-Final Demo</title>
+    <title>512-Final Demo</title>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="./defient.min.js"></script>
     <link rel="stylesheet" type="text/css" href="demo.css">
 </head>
-	<body>
 
-		<div class="form" id="program">
-			Select Programs: (CSE, PHIL, E E, etc.)<br>
-			<input type="text" id="programInput" list="programs">
-			<datalist id="programs"></datalist>
-			<button type="button" id="programSearch">Search Courses</button><br>
+<body>
 
-			<span class="loading" id="loadingprograms">
+    <div class="form" id="program">
+        Select Programs: (CSE, PHIL, E E, etc.)
+        <br>
+        <input type="text" id="programInput" list="programs">
+        <datalist id="programs"></datalist>
+        <button type="button" id="programSearch">Search Courses</button>
+        <br>
+
+        <span class="loading" id="loadingprograms">
 				<img src="https://webster.cs.washington.edu/images/babynames/loading.gif" alt="icon" />
 				Loading...
 			</span>
-		</div>
+    </div>
 
-		<div class="form" id="course">
-		Select Course:<br>
-		<input type="text" id="courseInput" list="courses">
-		<datalist id="courses"></datalist>
-		<button type="button" id="courseSearch">Search Sequence</button>
+    <div class="form" id="course">
+        Select Course:
+        <br>
+        <input type="text" id="courseInput" list="courses">
+        <datalist id="courses"></datalist>
+        <button type="button" id="courseSearch">Search Sequence</button>
 
-		<span class="loading" id="loadingcourses">
+        <span class="loading" id="loadingcourses">
 			<img src="https://webster.cs.washington.edu/images/babynames/loading.gif" alt="icon" />
 			Loading...
 		</span>
-		</div>
+    </div>
 
-		<div id="tree"></div>
+    <div id="tree"></div>
 
-		<script type="text/javascript" src="demo.js"></script>    
-	</body>
+    <script type="text/javascript" src="demo.js"></script>
+</body>
+
 </html>

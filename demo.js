@@ -132,16 +132,16 @@
 			var data = getProgramCourses(treeData, program);
 
 			//change this to course: 3rd parameter should be course
-			root = getObjects(data, program + " " +  course)
+			root = getObjects(data, program + " " + course)
 
 			//Collapse 2+ degree nodes
 			function collapse(d) {
-			    if (Object.keys(d.children).length > 0) {
-			      d._children = d.children;
-			      d._children.forEach(collapse);
-			      d.children = null;
-			    }
-			  }
+				if (Object.keys(d.children).length > 0) {
+					d._children = d.children;
+					d._children.forEach(collapse);
+					d.children = null;
+				}
+			}
 
 			//Collapse nodes
 			root.children.forEach(collapse);
@@ -155,7 +155,7 @@
 	function getProgramCourses(data, program) {
 		var programKeys = Object.keys(data);
 		for (var i = 0; i < programKeys.length; i++) {
-			if(Object.keys(data[i]) == program) {
+			if (Object.keys(data[i]) == program) {
 				return data[i][Object.keys(data[i])];
 			}
 		}
@@ -165,7 +165,7 @@
 	function getObjects(data, pc) {
 		var objs = JSON.search(data, '//*[name="' + pc + '"]');
 		for (var i = 0; i < objs.length; i++) {
-			if(objs[i].children !== undefined) {
+			if (objs[i].children !== undefined) {
 				return objs[i];
 			}
 		}
@@ -264,7 +264,9 @@
 		// Enter the links to add diagonal path
 		link.enter().insert("path", "g")
 			.attr("class", "link")
-			.style("stroke", function(d) { return d.target.type === "choice" ? "purple" : "lightgrey";})
+			.style("stroke", function(d) {
+				return d.target.type === "choice" ? "purple" : "lightgrey";
+			})
 			.attr("d", function(d) {
 				var o = {
 					x: source.x0,
@@ -305,14 +307,14 @@
 
 	// Toggle children on click.
 	function click(d) {
-  if (d.children) {
-    d._children = d.children;
-    d.children = null;
-  } else {
-    d.children = d._children;
-    d._children = null;
-  }
-  update(d);
-}
+		if (d.children) {
+			d._children = d.children;
+			d.children = null;
+		} else {
+			d.children = d._children;
+			d._children = null;
+		}
+		update(d);
+	}
 
 })(window.d3);
