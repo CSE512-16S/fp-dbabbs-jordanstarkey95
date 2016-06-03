@@ -1,7 +1,8 @@
 (function(d3) {
 	"use strict";
 
-	var path = "http://localhost:8000/Desktop/512_Final/Demo/";
+	//Path for local file requests
+	var path = "https://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/";
 
 	window.onload = function() {
 		document.getElementById("programSearch").onclick = getCourseList;
