@@ -140,8 +140,6 @@
 
 			var data = getProgramCourses(treeData, program);
 
-			//change this to course: 3rd parameter should be course
-
 			getObjects(data, (program + " " + course).replace(/\s+/g, ''))
 
 			root = el;
@@ -176,7 +174,7 @@
 	//
 	function getObjects(data, pc) {
 		for (var i = 0; i < data.length; i++) {
-			if (data[i].name.replace(/\s+/g, '') == pc) {
+			if (data[i].name !== undefined && data[i].name.replace(/\s+/g, '') == pc) {
 				el = data[i];
 				break;
 			}
