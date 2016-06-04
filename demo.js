@@ -1,6 +1,8 @@
 (function(d3) {
 	"use strict";
 
+	var el = []
+
 	//Path for local file requests
 	var path = "https://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/";
 
@@ -139,7 +141,10 @@
 			var data = getProgramCourses(treeData, program);
 
 			//change this to course: 3rd parameter should be course
-			root = getObjects(data, program + " " + course)
+
+			getObjects(data, (program + " " + course).replace(/\s+/g, ''))
+
+			root = el;
 
 			//Collapse 2+ degree nodes
 			function collapse(d) {
@@ -166,17 +171,19 @@
 				return data[i][Object.keys(data[i])];
 			}
 		}
-		return objs
 	}
 
 	//
 	function getObjects(data, pc) {
-		pc = pc.replace(/\s/g, "");
 		for (var i = 0; i < data.length; i++) {
-			name = data[i].name.replace(/\s/g, "");
-			if (name == pc) {
-				return data[i];
+			if (data[i].name.replace(/\s+/g, '') == pc) {
+				el = data[i];
 			}
+		}
+		for (var i = 0; i < data.length; i++) {
+			if(data[i].children !== undefined) {
+				 getObjects(data[i].children, pc);
+			} 
 		}
 	}
 
@@ -272,7 +279,7 @@
 		link.enter().insert("path", "g")
 			.attr("class", "link")
 			.style("stroke", function(d) {
-				return d.target.type === "choice" ? "purple" : "lightgrey";
+				return d.target.type === "choice" ? "lightgrey" : "steelblue";
 			})
 			.attr("d", function(d) {
 				var o = {
