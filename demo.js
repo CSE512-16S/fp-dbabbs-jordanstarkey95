@@ -16,7 +16,7 @@
 		var course = document.getElementById("courseInput").value;
 		var pc = program + " " + course;
 		// check if program/course is valid
-		if (pc.match(/^[A-Z]+[&]*[A-Z]*\s{1}\d{3}$/)) {
+		if (pc.match(/^[A-Z]+[&]*[A-Z]*\s[A-Z]*\s*\d{3}/)) {
 			buildTree(program, course);
 		} else {
 			alert("Invalid input, try again");
@@ -160,14 +160,16 @@
 				return data[i][Object.keys(data[i])];
 			}
 		}
+		return objs
 	}
 
 	//
 	function getObjects(data, pc) {
-		var objs = JSON.search(data, '//*[name="' + pc + '"]');
-		for (var i = 0; i < objs.length; i++) {
-			if (objs[i].children !== undefined) {
-				return objs[i];
+		pc = pc.replace(/\s/g, "");
+		for (var i = 0; i < data.length; i++) {
+			name = data[i].name.replace(/\s/g, "");
+			if (name == pc) {
+				return data[i];
 			}
 		}
 	}
