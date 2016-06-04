@@ -1,8 +1,10 @@
 from bs4 import BeautifulSoup
-import re, requests, json, pickle, glob
+import re, requests, json, pickle, glob, csv
 
+url = 'https://www.washington.edu/students/crscat/'
+'''
 # Beautiful soup object initialize and request
-r = requests.get('https://www.washington.edu/students/crscat/')
+r = requests.get(url)
 courseList = BeautifulSoup(r.content, "html.parser")
 links = courseList.findAll("a", {"href" : re.compile("^.*.html$")})
 
@@ -18,16 +20,20 @@ for course in links:
         t = t.replace(")", "")
         if t.find("See") is -1:
             c[course['href']] = t
-
+print(json.dumps(c))
 '''
+
+# read in courseURL.json
+with open('courseURL.json') as data_file:
+    data = json.load(data_file)
+
 # creates json file for program : courses list, used to populate search fields and create programList.json
 f = {}
-
-for k, y in c.items():
+for k, y in data.items():
     # list program courses
     p = []
 
-    r = requests.get(url + k)
+    r = requests.get(url + str(k))
     courseList = BeautifulSoup(r.content, "html.parser")
     courses = courseList.select("p")
     # filter courses (skips any <p> that isnt course listing (e.g. course offerings)
@@ -40,21 +46,23 @@ for k, y in c.items():
         p.append(title)
     f[y.encode('utf-8')] = p
 
+'''
 # csv output
 with open("programList.csv", "wb") as outfile:
    writer = csv.writer(outfile)
    writer.writerow(f.keys())
    writer.writerows(itertools.izip_longest(*f.values()))
+'''
 
 # json
 with open('programList.json', 'w') as outfile:
     json.dump(f, outfile)
 
 print(json.dumps(f))
-'''
 
-# For each url,program item in dict
-for k, y in c.items():
+'''
+# For each url,program courseURL in dict
+for k, y in data.items():
 
     # request url of this program
     r = requests.get('https://www.washington.edu/students/crscat/' + k)
@@ -187,7 +195,7 @@ for k, y in c.items():
         outfile.close()
     except ValueError:
         print f
-
+'''
 
 # different output formats
 '''
@@ -215,6 +223,7 @@ pickle.dump(programDict, filehandler)
 filehandler.close()
 '''
 
+'''
 # validate json files test
 read_files = glob.glob("*.json")
 output_list = []
@@ -232,3 +241,4 @@ for f in read_files:
 # merge all program files
 with open("merged_file.json", "wb") as outfile:
     json.dump(output_list, outfile)
+'''
