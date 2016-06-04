@@ -261,7 +261,7 @@
 		link.enter().insert("path", "g")
 			.attr("class", "link")
 			.style("stroke", function(d) {
-				return d.target.type === "choice" ? "lightgrey" : "lightsteelblue";
+				return d.target.type === "choice" ? "lightgrey" : "steelblue";
 			})
 			.attr("d", function(d) {
 				var o = {
