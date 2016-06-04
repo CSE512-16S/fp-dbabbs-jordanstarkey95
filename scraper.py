@@ -22,30 +22,32 @@ for course in links:
             c[course['href']] = t
 print(json.dumps(c))
 '''
-
 # read in courseURL.json
 with open('courseURL.json') as data_file:
     data = json.load(data_file)
-
+'''
 # creates json file for program : courses list, used to populate search fields and create programList.json
 f = {}
 for k, y in data.items():
     # list program courses
     p = []
 
-    r = requests.get(url + str(k))
+    y = str(y.encode('utf-8'))
+    k = str(k.encode('utf-8'))
+
+    r = requests.get(url + k)
     courseList = BeautifulSoup(r.content, "html.parser")
     courses = courseList.select("p")
     # filter courses (skips any <p> that isnt course listing (e.g. course offerings)
     # also eliminates unencoded chars (amp;)
-    courses = [x for x in courses if re.match('^' + y + '.*', x.text) and re.sub(r'amp;', '', x.text)]
-    for course in courses:
+    # skip p tag with course offerings
+    for course in courses[1:]:
         courseText = re.sub(';', '', course.text)
-        title = str(re.search('^' + y + '\s\d{3}', courseText).group())
-        title = re.sub("\D", "", title)
-        p.append(title)
-    f[y.encode('utf-8')] = p
-
+        title = courseText[:len(y) + 4].strip()
+        courseNum = re.sub(r'\D', '', title)
+        p.append(courseNum)
+    f[y] = p
+'''
 '''
 # csv output
 with open("programList.csv", "wb") as outfile:
@@ -53,7 +55,7 @@ with open("programList.csv", "wb") as outfile:
    writer.writerow(f.keys())
    writer.writerows(itertools.izip_longest(*f.values()))
 '''
-
+'''
 # json
 with open('programList.json', 'w') as outfile:
     json.dump(f, outfile)
@@ -63,6 +65,9 @@ print(json.dumps(f))
 '''
 # For each url,program courseURL in dict
 for k, y in data.items():
+
+    k = str(k.encode('utf-8'))
+    y = str(y.encode('utf-8'))
 
     # request url of this program
     r = requests.get('https://www.washington.edu/students/crscat/' + k)
@@ -132,9 +137,6 @@ for k, y in data.items():
         # if prerequsites exist, filter them into choice or required and add class attributes
         if preqIndex != -1:
 
-            minGradeIndex = courseText.find("minimum grade of")
-            if minGradeIndex != -1:
-
             c["description"] = courseText[:preqIndex]
 
             # strip char punctuations
@@ -161,10 +163,6 @@ for k, y in data.items():
 
         c["choice_prereqs"] = choice_preqList
         c["required_prereqs"] = required_preqList
-
-        print c["name"]
-        print c["required_prereqs"]
-        print c["choice_prereqs"]
 
         p.append(c)
 
@@ -195,7 +193,6 @@ for k, y in data.items():
         outfile.close()
     except ValueError:
         print f
-'''
 
 # different output formats
 '''
@@ -223,9 +220,13 @@ pickle.dump(programDict, filehandler)
 filehandler.close()
 '''
 
+
+
+
+
 '''
 # validate json files test
-read_files = glob.glob("*.json")
+read_files = glob.glob("output*.json")
 output_list = []
 
 for f in read_files:
