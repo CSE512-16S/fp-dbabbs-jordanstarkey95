@@ -178,6 +178,7 @@
 		for (var i = 0; i < data.length; i++) {
 			if (data[i].name.replace(/\s+/g, '') == pc) {
 				el = data[i];
+				break;
 			}
 		}
 		for (var i = 0; i < data.length; i++) {
