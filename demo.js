@@ -230,7 +230,7 @@
 		nodeUpdate.select("circle")
 			.attr("r", 10)
 			.style("fill", function(d) {
-				return d._children ? "rgb(51, 122, 183)" : "#fff";
+				return d._children ? "lightsteelblue" : "#fff";
 			});
 
 		nodeUpdate.select("text")
@@ -261,7 +261,7 @@
 		link.enter().insert("path", "g")
 			.attr("class", "link")
 			.style("stroke", function(d) {
-				return d.target.type === "choice" ? "purple" : "lightgrey";
+				return d.target.type === "choice" ? "lightgrey" : "lightsteelblue";
 			})
 			.attr("d", function(d) {
 				var o = {
