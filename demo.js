@@ -38,6 +38,12 @@
 	//
 	function getCourseList() {
 		document.getElementById("loadingcourses").style.display = "block";
+
+		var myNode = document.getElementById("courses");
+		while (myNode.firstChild) {
+		    myNode.removeChild(myNode.firstChild);
+		}
+
 		getQuery(path + "programList.json", fillCourseList);
 	}
 
@@ -123,6 +129,10 @@
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	function buildTree(program, course) {
+		//document.getElementById("loadingtree").style.display = "none";
+		//put tree in div element, hide until loaded
+		//document.getElementById("tree").innerHTML = "";
+
 		d3.json("merged_file.json", function(error, treeData) {
 			if (error) throw error;
 
@@ -177,6 +187,7 @@
 			links = tree.links(nodes);
 
 		// Normalize horizontal spacing
+		// this may be where i create same leaf paths*****
 		nodes.forEach(function(d) {
 			d.y = d.depth * 180;
 		});
@@ -261,7 +272,7 @@
 		link.enter().insert("path", "g")
 			.attr("class", "link")
 			.style("stroke", function(d) {
-				return d.target.type === "choice" ? "lightgrey" : "steelblue";
+				return d.target.type === "choice" ? "purple" : "lightgrey";
 			})
 			.attr("d", function(d) {
 				var o = {
