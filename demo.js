@@ -123,10 +123,6 @@
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	function buildTree(program, course) {
-		//document.getElementById("loadingtree").style.display = "none";
-		//put tree in div element, hide until loaded
-		//document.getElementById("tree").innerHTML = "";
-
 		d3.json("merged_file.json", function(error, treeData) {
 			if (error) throw error;
 
@@ -181,7 +177,6 @@
 			links = tree.links(nodes);
 
 		// Normalize horizontal spacing
-		// this may be where i create same leaf paths*****
 		nodes.forEach(function(d) {
 			d.y = d.depth * 180;
 		});
@@ -206,8 +201,6 @@
 			.attr("r", 10)
 			//Fills with blue if contains children
 			.style("fill", function(d) {
-				console.log(d);
-				console.log(d._children);
 				return d._children ? "lightsteelblue" : "#fff";
 			});
 
@@ -237,7 +230,7 @@
 		nodeUpdate.select("circle")
 			.attr("r", 10)
 			.style("fill", function(d) {
-				return d._children ? "lightsteelblue" : "#fff";
+				return d._children ? "rgb(51, 122, 183)" : "#fff";
 			});
 
 		nodeUpdate.select("text")
