@@ -22,10 +22,10 @@ for course in links:
             c[course['href']] = t
 print(json.dumps(c))
 '''
+'''
 # read in courseURL.json
 with open('courseURL.json') as data_file:
     data = json.load(data_file)
-'''
 # creates json file for program : courses list, used to populate search fields and create programList.json
 f = {}
 for k, y in data.items():
@@ -63,6 +63,7 @@ with open('programList.json', 'w') as outfile:
 print(json.dumps(f))
 
 '''
+'''
 # For each url,program courseURL in dict
 for k, y in data.items():
 
@@ -74,18 +75,15 @@ for k, y in data.items():
     courseList = BeautifulSoup(r.content, "html.parser")
     courses = courseList.select("p")
 
-    # return all courses, filtered with regex sub and start with the porgram/class title
-    courses = [x for x in courses if re.match('^' + y + '.*', x.text) and re.sub(r'amp;', '', x.text)]
-
     # master list containing dicts of every class in that program
     p = []
     # for every course in program course list
-    for course in courses:
+    for course in courses[1:]:
 
         # retrieve text inside html tags, stripping ; for unicode purposes
         courseText = re.sub(';', '', course.text)
         # retrieve title of this course
-        title = str(re.search('^' + y + '\s\d{3}', courseText).group())
+        title = courseText[:len(y) + 4].strip()
         c = {"name": title}
 
         # provide this for hyperlink?
@@ -93,8 +91,14 @@ for k, y in data.items():
         linkIndex = courseText.rfind("View course details in MyPlan:")
         courseText = courseText[:linkIndex]
 
-        # Get b tag in course, contians course title, credit, and credit type
-        courseInfo = course.select("b")[0].text
+        # Get b tag in course, contains course title, credit, and credit type
+        courseInfo = course.select("b")
+        # check if courses exist
+        if len(courseInfo) > 0:
+            courseInfo = courseInfo[0].text
+        else:
+            print course
+            break
 
         # COURSE INFO STRIPPING
         # course title
@@ -193,6 +197,7 @@ for k, y in data.items():
         outfile.close()
     except ValueError:
         print f
+'''
 
 # different output formats
 '''
@@ -221,10 +226,6 @@ filehandler.close()
 '''
 
 
-
-
-
-'''
 # validate json files test
 read_files = glob.glob("output*.json")
 output_list = []
@@ -242,4 +243,3 @@ for f in read_files:
 # merge all program files
 with open("merged_file.json", "wb") as outfile:
     json.dump(output_list, outfile)
-'''
