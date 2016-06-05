@@ -101,7 +101,7 @@
 			bottom: 20,
 			left: 120
 		},
-		width = 1280 - margin.right - margin.left,
+		width = 1400 - margin.right - margin.left,
 		height = 800 - margin.top - margin.bottom;
 
 	//
@@ -114,21 +114,33 @@
 	var tree = d3.layout.tree()
 		.size([height, width - 200]);
 
+
+
 	//Declares the function that will be used to draw the links between the nodes.
-	//This uses the d3.js diagonal function to help draw a path between two points 
+	//This uses the d3.js diagonal function to help draw a path between two points
 	//such that the line exhibits some nice flowing curves (cubic Bezier) to make the connection
 	var diagonal = d3.svg.diagonal()
 		.projection(function(d) {
 			return [d.y, d.x];
 		});
 
-	//Appends our SVG working area to the body of our web page and creates a group elements (<g>) 
+	//Initialize tooltip
+	var tip = d3.tip()
+	  .attr('class', 'd3-tip')
+	  .offset([-10, 0])
+	  .html(function(d) {
+	    return "<h4>" + d.course_title + " " + d.credits + "</h4></br>" + d.description + "</br></br>" + d.credit_type;
+	 });
+
+	//Appends our SVG working area to the body of our web page and creates a group elements (<g>)
 	//that will contain our svg objects (our nodes, text and links)
 	var svg = d3.select("#tree").append("svg")
 		.attr("width", width + margin.right + margin.left)
 		.attr("height", height + margin.top + margin.bottom)
 		.append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	svg.call(tip);
 
 	function buildTree(program, course) {
 		//document.getElementById("loadingtree").style.display = "none";
@@ -182,7 +194,7 @@
 		for (var i = 0; i < data.length; i++) {
 			if(data[i].children !== undefined) {
 				 getObjects(data[i].children, pc);
-			} 
+			}
 		}
 	}
 
@@ -202,7 +214,9 @@
 		var node = svg.selectAll("g.node")
 			.data(nodes, function(d) {
 				return d.id || (d.id = ++i);
-			});
+			})
+			.on('mouseover', tip.show)
+	  		.on('mouseout', tip.hide);
 
 		// Enter the nodes, translate to position and assign class node features
 		var nodeEnter = node.enter().append("g")
@@ -243,7 +257,7 @@
 				return "translate(" + d.y + "," + d.x + ")";
 			});
 
-		// Update fill of newly positioned circles on children conditional    
+		// Update fill of newly positioned circles on children conditional
 		nodeUpdate.select("circle")
 			.attr("r", 10)
 			.style("fill", function(d) {
@@ -267,7 +281,7 @@
 		nodeExit.select("text")
 			.style("fill-opacity", 1e-6);
 
-		// Declare the links to make a link based on all the links that have unique target id’s. 
+		// Declare the links to make a link based on all the links that have unique target id’s.
 		// Customize link color here
 		var link = svg.selectAll("path.link")
 			.data(links, function(d) {
