@@ -21,7 +21,7 @@
 		if (pc.match(/^[A-Z]+[&]*[A-Z]*\s[A-Z]*\s*\d{3}/)) {
 			buildTree(program, course);
 		} else {
-			alert("Invalid input, try again");
+			alert("Invalid input, please try again.");
 		}
 	}
 
@@ -129,7 +129,7 @@
 	  .attr('class', 'd3-tip')
 	  .offset([-10, 0])
 	  .html(function(d) {
-	    return "<h4>" + d.course_title + " " + d.credits + "</h4></br>" + d.description + "</br></br>" + d.credit_type;
+	    return "<h4>	" + d.course_title + " " + d.credits + "</h4></br>" + d.description + "</br></br>" + d.credit_type;
 	 });
 
 	//Appends our SVG working area to the body of our web page and creates a group elements (<g>)
