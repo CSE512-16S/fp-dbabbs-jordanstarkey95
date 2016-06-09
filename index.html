@@ -1,63 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8">
-	<title>UW Course Sequence Explorer</title>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>CSE 512: Final Project</title>
 
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Visualizing UW Course Prerequisite Sequences</h1>
+        <p>Dylan Babbs & Jordan Starkey</p>
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+         <p><a href="http://cs.uw.edu/512">CSE 512:</a> Final Project (Spring 2016)</br>
+        <a href="http://cs.uw.edu">Computer Science & Engineering</a>
+        </br><a href="http://uw.edu">University of Washington</a></p>
 
-    <!-- Latest compiled JavaScript -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <p class="view"><a href="https://github.com/CSE512-16S/fp-dbabbs-jordanstarkey95">View the Project on GitHub <small>CSE512-16S/fp-dbabbs-jordanstarkey95</small></a></p>
 
-    <!-- d3 tooltip -->
-    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-</head>
-	<body>
-      <div class="container-fluid">
 
-         <div class="page-header">
-            <h1>UW Course Sequence Explorer</h1>
-            <p class="lead">Explore the UW course catalog through dynamic trees. CSE 512 Final Project. Dylan Babbs & Jordan Starkey. <a href="http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/about">Learn more.</a></p>
-         </div>
+        <!--<ul>
+          <li><a href="https://github.com/CSE512-16S/fp-dbabbs-jordanstarkey95/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/CSE512-16S/fp-dbabbs-jordanstarkey95/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/CSE512-16S/fp-dbabbs-jordanstarkey95">View On <strong>GitHub</strong></a></li>
+       </ul>-->
+      </header>
+      <section>
+         <a href="http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/live"><img src="summary.png" alt="summary">
+        <h3>
+<a id="abstract" class="anchor" href="#abstract" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Abstract</h3>
 
-         <div class="form-inline">
-            <div class="form" id="program">
-      			<!--<label for="courseInput">Select Program</label>-->
-      			<input class="form-control" type="text" id="programInput" list="programs" placeholder="CSE">
-      			<datalist id="programs"></datalist>
-      			<button class="btn btn-primary" id="programSearch">Search Courses</button><br>
+<p>Navigating the <a href="https://www.washington.edu/students/crscat/">UW course catalog</a> can be a difficult task -- especially when dealing with prerequisites. The course description lists the prerequisites necessary in order to enroll in a specific course, however, the description lists only the first degree of prerequisites required. For example, <a href="https://www.washington.edu/students/crscat/cse.html#cse373">CSE 373: Data Structures and Algorithms</a>, lists CSE 143 as the only required prerequisite. Unbeknownst to a student browsing the catalog, CSE 143 requires CSE 142 as a prerequisite. Therefore, the prerequisites needed to enroll in CSE 373 are both CSE 142 and CSE 143.</p>
 
-      			<span class="loading" id="loadingprograms">
-      				<img src="https://webster.cs.washington.edu/images/babynames/loading.gif" alt="icon" />
-      				Loading...
-      			</span>
-      		</div>
+<p>Coursework planning can become a headache within minutes of browsing the catalog. The goal of this tool is to improve degree and coursework planning transparency by providing an intuitive visualization experience using trees. All the user is required to do is input a course in order to explore courses series. The user’s course input becomes the node of the tree, and the node’s children become the “post”-requisites of the course. Without this tool, students are forced to backwards trace their course sequences to find course’s second (or higher) degree prerequisites.</p>
 
-      		<div class="form" id="course">
-         		<!--<label for="courseInput">Select Course</label>-->
-         		<input class="form-control" type="text" id="courseInput" list="courses" placeholder="142">
-         		<datalist id="courses"></datalist>
-         		<button class="btn btn-primary" id="courseSearch">Search Sequence</button>
-         		<span class="loading" id="loadingcourses">
-         			<img src="https://webster.cs.washington.edu/images/babynames/loading.gif" alt="icon" />
-         			Loading...
-         		</span>
-      		</div>
-            <div>  
-               <span class="label label-default">Optional Prereq</span>
-               <span class="label label-primary">Required Prereq</span>
-            </div>
-         </div>
+<h3>
+<a id="final-paper" class="anchor" href="#final-paper" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Final Paper</h3>
 
-   		<div id="tree"></div>
+<p>View our final paper <a href="paper.pdf">here</a>.</p>
 
-   		<script type="text/javascript" src="demo.js"></script>
-      </div>
-   </body>
+<h3>
+<a id="poster" class="anchor" href="#poster" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Poster</h3>
+
+<p>View the project's poster for the Final Poster Presentation here.</p>
+<a href="poster-dbabbs-jds56.pdf"><img src="postericon.png" alt="poster"></a>
+<h3>
+<a id="instructions" class="anchor" href="#instructions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Running Instructions</h3>
+
+<p>View the live visualization <a href="http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/">here</a> or download the <a href="https://github.com/CSE512-16S/fp-dbabbs-jordanstarkey95">Github repository</a> and run locally with <code>-m SimpleHTTPServer 8888</code>   .</p>
+
+<h3>
+<a id="contact" class="anchor" href="#contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contact</h3>
+
+<p>Feel free to contact us at dbabbs (at) uw.edu or jds56 (at) uw.edu with any questions.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/CSE512-16S">CSE512-16S</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+
+  </body>
 </html>
