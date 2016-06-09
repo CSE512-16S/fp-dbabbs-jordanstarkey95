@@ -27,8 +27,8 @@ Coursework planning can become a headache within minutes of browsing the catalog
 3.	Create the web scraper. The web scraper is a very pivotal aspect of the project, as we need to grab data from the University of Washington official course catalog. Jordan completed the python web scraper.
 4.	Use mock data to create prototype. Jordan and Dylan worked together to create an initial prototype.
 5.	Build the visualization. Jordan built the majority of the tool.
-6.	Implement a proper user interface. Upon completion of a functioning final version, we going implemented a beautiful user experience in the tool. Dylan took charge of this part
-7.	Create posterboard and content. Dylan completed this task
+6.	Implement a proper user interface. Upon completion of a functioning final version, we going implemented a beautiful user experience in the tool. Dylan took charge of this part.
+7.	Create posterboard and content. Dylan completed this task.
 8.	Write conference paper. Both team members worked on this part.
 
 ## Running Instructions
