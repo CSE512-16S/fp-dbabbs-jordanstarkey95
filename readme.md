@@ -3,8 +3,8 @@ Visualizing UW Course Prerequisite Sequences
 
 ## Team Members
 
-1. Dylan Babbs (dbabbs) 
-2. Jordan Starkey (jds56)
+1. [Dylan Babbs (dbabbs)](mailto:dbabbs@uw.edu)
+2. [Jordan Starkey (jds56)](mailto:jds56@uw.edu)
 
 ## Project
 
