@@ -12,9 +12,11 @@ Navigating the UW course catalog can be a difficult task -- especially when deal
 
 Coursework planning can become a headache within minutes of browsing the catalog. The goal of this tool is to improve degree and coursework planning transparency by providing an intuitive visualization experience using trees. All the user is required to do is input a course in order to explore courses series. The user’s course input becomes the node of the tree, and the node’s children become the “post”-requisites of the course. Without this tool, students are forced to backwards trace their course sequences to find course’s second (or higher) degree prerequisites.
 
+[Live Project](http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/live) |
 [Poster](http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/poster-dbabbs-jds56.pdf) | 
 [Final Paper](http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/paper-dbabbs-jds56.pdf) |
 [Progress Presentation Deck](http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/slides-dbabbs-jds56.pdf)
+
 
 
 ![alt text](http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/summary.png "Project")
@@ -34,4 +36,4 @@ Coursework planning can become a headache within minutes of browsing the catalog
 
 Put your running instructions here.  (Tell us how to open your visualization.)
 
-Access our visualization at http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/ or download this repository and run `python -m SimpleHTTPServer 8888` and access this from http://localhost:8888/.
+Access our visualization at http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/live or download this repository and run `python -m SimpleHTTPServer 8888` and access this from http://localhost:8888/.
