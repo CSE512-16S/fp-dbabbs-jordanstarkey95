@@ -14,7 +14,7 @@ Coursework planning can become a headache within minutes of browsing the catalog
 
 [Poster](http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/poster-dbabbs-jds56.pdf) | 
 [Final Paper](http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/paper-dbabbs-jds56.pdf) |
-[Progress Presentation Deck](http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/slides-dbabbs-jds56.pdf) | 
+[Progress Presentation Deck](http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/slides-dbabbs-jds56.pdf)
 
 
 ![alt text](http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/summary.png "Project")
