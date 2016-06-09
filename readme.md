@@ -3,7 +3,7 @@ Project Name
 
 ## Team Members
 
-1. Dylan Babbs (jheer)
+1. Dylan Babbs (dbabbs)
 2. Jordan Starkey (jds56)
 
 ## Breakdown
