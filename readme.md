@@ -1,5 +1,6 @@
 Visualizing UW Course Prerequisite Sequences
 ===============
+[View the public project page](http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95)
 
 ## Team Members
 
@@ -20,19 +21,6 @@ Coursework planning can become a headache within minutes of browsing the catalog
 
 ![alt text](http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/summary.png "Project")
 
-## Breakdown
-
-1.	Plan. Decide on project idea and determine scope of the plan. Create project progress presentation, storyboard, project plan, and literature review. Dylan and Jordan decided on the project together, and Dylan created the planning deliverables.
-2.	Determine data schema. Dylan and Jordan researched other D3.js projects that have used trees, networks, and graphs before in order to find the best format to store the data. Both partners researched independently and reported their results.
-3.	Create the web scraper. The web scraper is a very pivotal aspect of the project, as we need to grab data from the University of Washington official course catalog. Jordan completed the python web scraper.
-4.	Use mock data to create prototype. Jordan and Dylan worked together to create an initial prototype.
-5.	Build the visualization. Jordan built the majority of the tool.
-6.	Implement a proper user interface. Upon completion of a functioning final version, we going implemented a beautiful user experience in the tool. Dylan took charge of this part.
-7.	Create posterboard and content. Dylan completed this task.
-8.	Write conference paper. Both team members worked on this part.
-
 ## Running Instructions
-
-Put your running instructions here.  (Tell us how to open your visualization.)
 
 Access our visualization at http://cse512-16s.github.io/fp-dbabbs-jordanstarkey95/live or download this repository and run `python -m SimpleHTTPServer 8888` and access this from http://localhost:8888/.
